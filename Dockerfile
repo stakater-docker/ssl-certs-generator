@@ -1,4 +1,4 @@
-FROM stakater/base-alpine
+FROM stakater/base-alpine:3.5
 
 RUN apk --update add openssl
 
