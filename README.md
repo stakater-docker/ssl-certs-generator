@@ -1,17 +1,18 @@
-OMGWTFSSL - Self Signed SSL Certificate Generator
+Self Signed SSL Certificate Generator
 =================================================
 
 About
 -----
+Origin: https://github.com/paulczar/omgwtfssl
 
 Sick of googling every time you need a self signed certificate?
 
-OMGWTFSSL is a small (< 8 mb) docker image based off `alpine linux` which makes creating self signed SSL certs easier:
+This is a small docker image based off `alpine linux` which makes creating self signed SSL certs easier:
 
 ```
-$ docker run -v /tmp/certs:/certs paulczar/omgwtfssl
+$ docker run -v /tmp/certs:/certs stakater/ssl-certs-generator:1.0
 ----------------------------
-| OMGWTFSSL Cert Generator |
+| SSL Cert Generator |
 ----------------------------
 
 --> Certificate Authority
@@ -73,7 +74,7 @@ _Creating web certs for testing SSL just got a hell of a lot easier..._
 Create Certificate:
 ```
 $ docker run -v /tmp/certs:/certs \
-  -e SSL_SUBJECT=test.example.com   paulczar/omgwtfssl
+  -e SSL_SUBJECT=test.example.com   stakater/ssl-certs-generator:1.0
 ```
 
 Enable SSL in `/etc/nginx/sites-enabled/default`:
@@ -111,17 +112,17 @@ $ curl --cacert /tmp/certs/ca.pem https://test.example.com
 
 ### Create keys for docker registry
 
-_Slightly more interesting example of using `paulczar/omgwtfssl` as a volume container to build and host SSL certs for the Docker Registry image_
+_Slightly more interesting example of using `stakater/ssl-certs-generator` as a volume container to build and host SSL certs for the Docker Registry image_
 
-Create the volume container for the registry from `paulczar/omgwtfssl`:
+Create the volume container for the registry from `stakater/ssl-certs-generator`:
 
 ```
 $ docker run \
   --name certs \
   -e SSL_SUBJECT=test.example.com \
-  paulczar/omgwtfssl
+  stakater/ssl-certs-generator
 ----------------------------
-| OMGWTFSSL Cert Generator |
+| SSL Cert Generator |
 ----------------------------
 
 --> Certificate Authority
