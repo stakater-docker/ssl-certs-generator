@@ -1,6 +1,6 @@
-FROM alpine
+FROM stakater/base-alpine
 
-RUN apk --update add bash openssl
+RUN apk --update add openssl
 
 WORKDIR /certs
 
